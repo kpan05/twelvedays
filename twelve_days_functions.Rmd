@@ -1,5 +1,7 @@
 ---
 title: "Lab: The 12 Days of Christmas"
+author: "Sophie Moore, Molly Murphy, Katie Pan, Riley Sanders, Thea Yang"
+date: "20 May 2021"
 output:
   prettydoc::html_pretty:
     theme: tactile
@@ -26,13 +28,6 @@ xmas <- read.csv("https://www.dropbox.com/s/e584pryn8evm1gz/xmas.csv?dl=1")
 
 ## Step One:  Plurals
 
-Note that the gifts are listed in singular: for example, on day five the
-narrator receives "five golden rings", but the entry in the dataset for the gift
-on day 5 simply says "ring".  
-
-Using the skeleton of the `pluralize_gift()` function, complete the code so that 
-the function takes a gift and returns the appropriate plural. 
-
 ```{r}
 # Function that takes a noun and makes it plural
 # Arguments -- gift -- A string or vector of strings
@@ -52,11 +47,7 @@ return(gift)
 ```
 
 
-### Test Your Function
-
-Try your function out on the gifts in the dataset.  
-(Consider: is your function *vectorized*?  It does not have to be, but it may
-make things simpler!)
+### Test Function
 
 ```{r}
 
@@ -71,24 +62,6 @@ purrr::map_chr(xmas$Gift.Item, pluralize_gift)
 
 
 ## Step Two: Creating sentences
-
-Write a function called `make_phrase` that takes as input the necessary information, 
-and returns a phrase.  For example, 
-
-```{r}
-make_phrase(num = 10, 
-            num_word = "ten", 
-            item = "lords", 
-            verb = "a-leaping", 
-            adjective = "", 
-            location = "")
-```
-
-should return
-
-```
-"ten lords a-leaping"
-```
 
 ```{r}
 make_phrase <- function(num, num_word, item, verb, adjective, location) {
@@ -110,13 +83,13 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
     
     item <- pluralize_gift(item)
     
-  } else if (vowel_start == TRUE) {
+  } else if (vowel_start) {
   
-      item <- str_replace(item, "\\w+", "an \\0")
+      num_word <- "an"
     
   } else {
     
-      item <- str_replace(item, "\\w+", "a \\0")
+      num_word <- "a"
     
   }
   
@@ -128,16 +101,20 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
 ```
 
 
-# Test Your Function
-
-Try your function out on the `xmas` data, by making a new variable containing
-the daily phrases.
-
-**Hint:** The `Day.in.Words` variable isn't quite what you want! You want `12`
-to say `"twelve"` **not** `"twelfth"`. I suggest using the **english** package
-to create numbered days and then use those in your `pmap_chr()`!
+# Test Function
 
 ```{r}
+make_phrase(num = 10,
+            num_word = "ten",
+            item = "lord",
+            verb = "a-leaping",
+            adjective = "",
+            location = "")
+```
+
+```{r}
+# make column with full phrases
+
 xmas <- xmas %>%
   mutate(day.num = words(Day), 
          Full.Phrase = pmap_chr(list(num = Day, 
@@ -149,7 +126,6 @@ xmas <- xmas %>%
                                 make_phrase)
   )
 
-xmas$Full.Phrase <- str_replace(xmas$Full.Phrase, "one", "")   #get rid of the "1"
 ```
 
 
@@ -157,14 +133,6 @@ xmas$Full.Phrase <- str_replace(xmas$Full.Phrase, "one", "")   #get rid of the "
 
 
 ## Step Three:  Iteration.
-
-Write a function called `sing_line` that takes as input:
-
-* A dataset
-
-* A number indicating which day to sing about
-
-* The name of a column in the dataset that contains the phrases for each day.
 
 ```{r}
 # Produces the string for one day of the song.
@@ -177,30 +145,29 @@ sing_line <- function(dataset, line, phrase_col){
   
   # Step 1: Setup the intro line
   
-  num_word <- xmas$Day.in.Words
+  num_word <- ordinal(line)
   
-  intro <- glue::glue("On the {num_word} day of Christmas")
+  intro <- glue::glue("On the {num_word} day of Christmas,")
   
   # Step 2: Sing the gift phrases
 
     phrases <- dataset %>% 
       pull({{phrase_col}})
 
-   phrases <- glue::glue("{phrases}")
+   phrases[2] <- str_c(phrases[2], "and", sep = " ")
+   body <- str_c(phrases[line:1], collapse = "\n")
     
   ## put it together
     
-  glue::glue({intro}, "my true love sent to me", "\\n", {phrases})
+  glue::glue("{intro} my true love sent to me, \n {body}")
 
 
 }
 
-
 ```
 
-For example,
 
-
+## Test function
 ```{r}
 sing_line(xmas, 
           line = 2, 
@@ -208,23 +175,9 @@ sing_line(xmas,
 
 ```
 
-should return
-
-```
-On the second day of Christmas, my true love sent to me,
-two turtle doves 
-and a partridge in a pear tree.
-```
-
-*Hint:*  The `{{phrase_col}}` part, which I provided for you, lets you use 
-column names as arguments to a function.  Don't delete that line of code!
-
 ---
 
 ## Step Four: Use Your Functions!
-
-Run the following code to test out your functions! The ouput should be the 
-lyrics for the entire 12 Days of Christmas song. 
 
 ```{r}
 xmas2 <- xmas %>%
@@ -244,26 +197,3 @@ map_chr(1:12, ~sing_line(xmas2, .x, Full.Phrase)) %>%
   cat()
 
 ```
-
-
-## Step Five: Show Me Your Work! 
-
-#### Get it on GitHub
-
-Once you are done with all the functions, make sure you have **pushed** your
-work to GitHub.
-
-Make sure your repository contains your completed RMarkdown document and
-knitted HTML. 
-
-- Your HTML should **only** show the code for your functions and output from 
-testing / verifying that your functions perform as they should. 
-
-__If you used GitHub to store your work:__
-
-Submit the link to your GitHub repository in the Lab 8 assignment portal. 
-
-__If you downloaded the compressed folder and did not use GitHub:__
-
-Submit **both** your RMarkdown file and knitted HTML file
-
