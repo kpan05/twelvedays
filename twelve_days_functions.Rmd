@@ -172,7 +172,7 @@ xmas <- xmas %>%
                                 verb = Verb, 
                                 adjective = Adjective, 
                                 location = Location), 
-                                make_phrase,)
+                                make_phrase)
   )
 
 xmas$Full.Phrase <- str_replace(xmas$Full.Phrase, "one", "")   #get rid of the "1"
@@ -212,11 +212,11 @@ sing_line <- function(dataset, line, phrase_col){
     phrases <- dataset %>% 
       pull({{phrase_col}})
 
-???
+   phrases <- glue::glue("{phrases}")
     
   ## put it together
     
-  glue({intro}, "my true love sent to me", "\\n", {phrases})
+  glue::glue({intro}, "my true love sent to me", "\\n", {phrases})
 
 
 }
