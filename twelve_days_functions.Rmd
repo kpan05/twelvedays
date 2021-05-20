@@ -101,7 +101,7 @@ make_phrase <- function(num, num_word, item, verb, adjective, location) {
 ```
 
 
-# Test Function
+### Test Function
 
 ```{r}
 make_phrase(num = 10,
@@ -159,7 +159,7 @@ sing_line <- function(dataset, line, phrase_col){
     
   ## put it together
     
-  glue::glue("{intro} my true love sent to me, \n {body}")
+  glue::glue("{intro} my true love sent to me, \n {body}.")
 
 
 }
@@ -167,7 +167,7 @@ sing_line <- function(dataset, line, phrase_col){
 ```
 
 
-## Test function
+### Test function
 ```{r}
 sing_line(xmas, 
           line = 2, 

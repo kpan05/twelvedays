@@ -214,9 +214,8 @@ code span.ot { color: #007020; }
 <a class="sourceLine" id="cb6-32" data-line-number="32">  </a>
 <a class="sourceLine" id="cb6-33" data-line-number="33">  </a>
 <a class="sourceLine" id="cb6-34" data-line-number="34">}</a></code></pre></div>
-</div>
-<div id="test-function-1" class="section level1">
-<h1>Test Function</h1>
+<div id="test-function-1" class="section level3">
+<h3>Test Function</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">make_phrase</span>(<span class="dt">num =</span> <span class="dv">10</span>,</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">            <span class="dt">num_word =</span> <span class="st">&quot;ten&quot;</span>,</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">            <span class="dt">item =</span> <span class="st">&quot;lord&quot;</span>,</a>
@@ -237,6 +236,8 @@ code span.ot { color: #007020; }
 <a class="sourceLine" id="cb9-11" data-line-number="11">                                make_phrase)</a>
 <a class="sourceLine" id="cb9-12" data-line-number="12">  )</a></code></pre></div>
 <hr />
+</div>
+</div>
 <div id="step-three-iteration." class="section level2">
 <h2>Step Three: Iteration.</h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># Produces the string for one day of the song.</span></a>
@@ -263,20 +264,20 @@ code span.ot { color: #007020; }
 <a class="sourceLine" id="cb10-22" data-line-number="22">    </a>
 <a class="sourceLine" id="cb10-23" data-line-number="23">  <span class="co">## put it together</span></a>
 <a class="sourceLine" id="cb10-24" data-line-number="24">    </a>
-<a class="sourceLine" id="cb10-25" data-line-number="25">  glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;{intro} my true love sent to me, </span><span class="ch">\n</span><span class="st"> {body}&quot;</span>)</a>
+<a class="sourceLine" id="cb10-25" data-line-number="25">  glue<span class="op">::</span><span class="kw">glue</span>(<span class="st">&quot;{intro} my true love sent to me, </span><span class="ch">\n</span><span class="st"> {body}.&quot;</span>)</a>
 <a class="sourceLine" id="cb10-26" data-line-number="26"></a>
 <a class="sourceLine" id="cb10-27" data-line-number="27"></a>
 <a class="sourceLine" id="cb10-28" data-line-number="28">}</a></code></pre></div>
-</div>
-<div id="test-function-2" class="section level2">
-<h2>Test function</h2>
+<div id="test-function-2" class="section level3">
+<h3>Test function</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">sing_line</span>(xmas, </a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">          <span class="dt">line =</span> <span class="dv">2</span>, </a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">          <span class="dt">phrase_col =</span> Full.Phrase)</a></code></pre></div>
 <pre><code>## On the second day of Christmas, my true love sent to me, 
 ## two turtle doves and
-## a partridge in a pear tree</code></pre>
+## a partridge in a pear tree.</code></pre>
 <hr />
+</div>
 </div>
 <div id="step-four-use-your-functions" class="section level2">
 <h2>Step Four: Use Your Functions!</h2>
@@ -296,32 +297,32 @@ code span.ot { color: #007020; }
 <a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">  </span><span class="kw">str_c</span>(<span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-15" data-line-number="15"><span class="st">  </span><span class="kw">cat</span>()</a></code></pre></div>
 <pre><code>## On the first day of Christmas, my true love sent to me, 
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the second day of Christmas, my true love sent to me, 
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the third day of Christmas, my true love sent to me, 
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the fourth day of Christmas, my true love sent to me, 
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the fifth day of Christmas, my true love sent to me, 
 ## five golden rings
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the sixth day of Christmas, my true love sent to me, 
 ## six geese a-laying
 ## five golden rings
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the seventh day of Christmas, my true love sent to me, 
 ## seven swans a-swimming
 ## six geese a-laying
@@ -329,7 +330,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the eighth day of Christmas, my true love sent to me, 
 ## eight maids a-milking
 ## seven swans a-swimming
@@ -338,7 +339,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the ninth day of Christmas, my true love sent to me, 
 ## nine ladies dancing
 ## eight maids a-milking
@@ -348,7 +349,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the tenth day of Christmas, my true love sent to me, 
 ## ten lords a-leaping
 ## nine ladies dancing
@@ -359,7 +360,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the eleventh day of Christmas, my true love sent to me, 
 ## eleven pipers piping
 ## ten lords a-leaping
@@ -371,7 +372,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree
+## a partridge in a pear tree.
 ## On the twelfth day of Christmas, my true love sent to me, 
 ## twelve drummers drumming
 ## eleven pipers piping
@@ -384,8 +385,7 @@ code span.ot { color: #007020; }
 ## four calling birds
 ## three french hens
 ## two turtle doves and
-## a partridge in a pear tree</code></pre>
-</div>
+## a partridge in a pear tree.</code></pre>
 </div>
 </div>
 </div>
