@@ -50,7 +50,7 @@ pluralize_gift <- function(gift){
 gift <- gift %>%
   str_replace("y$", "ie") %>% 
   str_c("s") %>% 
-  str_replace("gooses", "goose")
+  str_replace("gooses", "geese")
 
 return(gift)
 
@@ -165,15 +165,17 @@ to create numbered days and then use those in your `pmap_chr()`!
 
 ```{r}
 xmas <- xmas %>%
-  mutate(day.num = as.english(Day), 
+  mutate(day.num = words(Day), 
          Full.Phrase = pmap_chr(list(num = Day, 
                                 num_word = day.num, 
                                 item = Gift.Item, 
                                 verb = Verb, 
                                 adjective = Adjective, 
                                 location = Location), 
-                                make_phrase)
+                                make_phrase,)
   )
+
+xmas$Full.Phrase <- str_replace(xmas$Full.Phrase, "one", "")   #get rid of the "1"
 ```
 
 
@@ -197,11 +199,11 @@ Write a function called `sing_line` that takes as input:
 # Arguments -- phrase_col -- The variable name for the column in the dataset that contains the gift phrases
 # Return -- A string singing the line of the song with all gifts for the given day.
 
-sing_day <- function(dataset, line, phrase_col){
+sing_line <- function(dataset, line, phrase_col){
   
   # Step 1: Setup the intro line
   
-  num_word <- ____
+  num_word <- xmas$Day.in.Words
   
   intro <- glue::glue("On the {num_word} day of Christmas")
   
@@ -210,11 +212,11 @@ sing_day <- function(dataset, line, phrase_col){
     phrases <- dataset %>% 
       pull({{phrase_col}})
 
-  ????
+???
     
   ## put it together
     
-  ????
+  glue({intro}, "my true love sent to me", "\\n", {phrases})
 
 
 }
@@ -227,7 +229,7 @@ For example,
 
 ```{r}
 sing_line(xmas, 
-          num = 2, 
+          line = 2, 
           phrase_col = Full.Phrase)
 
 ```
